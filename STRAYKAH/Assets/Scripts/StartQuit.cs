@@ -18,6 +18,10 @@ public class StartQuit : MonoBehaviour
     public void QuitGame(){
         StartCoroutine(WaitClickEndButton());
     }
+    public void Restart(){
+        StartCoroutine(WaitClickEndButton());
+        SceneManager.LoadScene(0);
+    }
     // Enumarators
     IEnumerator WaitClickStart(){
         yield return new WaitForSeconds(1);
@@ -36,11 +40,4 @@ public class StartQuit : MonoBehaviour
         PanelEnd.SetActive(false);
         Application.Quit();
     }
-
-
-    //public void Restart(){
-    //     StartCoroutine(LoadLevel());
-    //     SceneManager.LoadScene(0);
-    // }
-
 }
