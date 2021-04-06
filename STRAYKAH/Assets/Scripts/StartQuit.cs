@@ -22,6 +22,7 @@ public class StartQuit : MonoBehaviour
         StartCoroutine(WaitClickEndButton());
         SceneManager.LoadScene(0);
     }
+    
     // Enumarators
     IEnumerator WaitClickStart(){
         yield return new WaitForSeconds(1);
