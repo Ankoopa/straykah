@@ -8186,7 +8186,7 @@ GameObject:
   - component: {fileID: 927795824}
   m_Layer: 5
   m_Name: PowerText
-  m_TagString: Untagged
+  m_TagString: powerLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
