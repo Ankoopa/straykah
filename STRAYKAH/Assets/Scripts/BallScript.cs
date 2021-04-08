@@ -11,10 +11,10 @@ public class BallScript : MonoBehaviour
     private float defaultKickForce, kickForce;
     private float directionMultiplier, forceMultiplier;
 
-    private bool isAnim;
+    private bool isAnim = true;
     public Text powerText;
 
-    public GameObject arrowGuide;
+    public GameObject arrowGuide, arrowObject;
     // Start is called before the first frame update
     void Start(){
         camScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraAnimScript>();
@@ -28,7 +28,6 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isAnim = camScript.isAnimating;
         if(!isAnim){
             if(Input.GetAxis("Mouse X")<0){
                 arrowGuide.transform.Rotate(0, -100 * Time.deltaTime, 0);
@@ -42,20 +41,29 @@ public class BallScript : MonoBehaviour
             }
             
             if(arrowGuide.transform.localRotation.eulerAngles.y < 320  && arrowGuide.transform.localRotation.eulerAngles.y > 180){
-                arrowGuide.transform.eulerAngles = new Vector3(0, -40, 0);
+                arrowGuide.transform.localEulerAngles = new Vector3(0, -40, 0);
             }
             else if(arrowGuide.transform.localRotation.eulerAngles.y > 40  && arrowGuide.transform.localRotation.eulerAngles.y < 180){
-                arrowGuide.transform.eulerAngles = new Vector3(0, 40, 0);
+                arrowGuide.transform.localEulerAngles = new Vector3(0, 40, 0);
             }
+        }
+        else{
+            isAnim = camScript.isAnimating;
         }
     }
 
     public void StartKick(){
         float angle = arrowGuide.transform.localRotation.eulerAngles.y;
+        float angleOffset = arrowObject.transform.localEulerAngles.y;
+
         angle = (angle > 180) ? angle - 360 : angle; // converts to negative angle if angled to the left
 
-        directionMultiplier = angle / 40;
+        Debug.Log("Angle Offset " + angleOffset);
+
+        directionMultiplier = (angle+angleOffset) / 40;
         throwDirection.x *= directionMultiplier;
+
+        Debug.Log("DIrection multiplier: " + directionMultiplier);
 
         forceMultiplier = (float)int.Parse(powerText.text)/100;
         kickForce = defaultKickForce * forceMultiplier;

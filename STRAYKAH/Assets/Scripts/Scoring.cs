@@ -10,8 +10,9 @@ public class Scoring : MonoBehaviour
     public int score = 0;
     public Text text;
     private int moveLevel = 5;
+    private float[] arrowAngles = {0, 0, -30, 30, 0};
+
     public GameObject[] balls;
-    
     public GameObject Sphere;
     public GameObject Arrow;
 
@@ -52,8 +53,14 @@ public class Scoring : MonoBehaviour
                     balls[moveLevel-1].SetActive(true);
                     Character.transform.position = waypoints[moveLevel-1].position;
                     Character.transform.rotation = waypoints[moveLevel-1].rotation;
+
                     BallObject.transform.position = BallWaypoint.position;
                     BallObject.transform.rotation = BallWaypoint.rotation;
+                    BallObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    Arrow.transform.position = BallWaypoint.position;
+                    Arrow.transform.rotation = Quaternion.Euler(0, arrowAngles[moveLevel-1], 0);
+                    print(Arrow.transform.rotation.eulerAngles);
                     break;
 
             }
