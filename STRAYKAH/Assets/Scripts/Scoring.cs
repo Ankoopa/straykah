@@ -53,7 +53,6 @@ public class Scoring : MonoBehaviour
                 Ball4.SetActive(false);
             }
             else if (moveLevel == 4){
-                Destroy(Sphere0);
                 Ball4.SetActive(true);
 
                 Character.transform.position = Waypoint1.position;
@@ -62,7 +61,6 @@ public class Scoring : MonoBehaviour
                 BallObject.transform.rotation = BallWaypoint.rotation;
             }
             else if (moveLevel == 3){
-                Destroy(Sphere);
                 Ball3.SetActive(true);
 
                 Character.transform.position = Waypoint2.position;
@@ -71,7 +69,6 @@ public class Scoring : MonoBehaviour
                 BallObject.transform.rotation = BallWaypoint.rotation;
             }
             else if (moveLevel == 2){
-                Destroy(Sphere1);
                 Ball2.SetActive(true);
 
                 Character.transform.position = Waypoint3.position;
@@ -80,7 +77,6 @@ public class Scoring : MonoBehaviour
                 BallObject.transform.rotation = BallWaypoint.rotation;
             }
             else if (moveLevel == 1){
-                Destroy(Sphere2);
                 Ball1.SetActive(true);
                 BonusShot.SetActive(true);
 
