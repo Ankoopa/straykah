@@ -13,7 +13,6 @@ public class Scoring : MonoBehaviour
     public GameObject[] balls;
     
     public GameObject Sphere;
-
     public GameObject Arrow;
 
     public Transform[] waypoints;
@@ -48,6 +47,8 @@ public class Scoring : MonoBehaviour
                     foreach(GameObject ball in balls) ball.SetActive(false);
                     break;
                 default:
+                    if(moveLevel == 1) BonusShot.SetActive(true);
+
                     balls[moveLevel-1].SetActive(true);
                     Character.transform.position = waypoints[moveLevel-1].position;
                     Character.transform.rotation = waypoints[moveLevel-1].rotation;
@@ -56,6 +57,7 @@ public class Scoring : MonoBehaviour
                     break;
 
             }
+
             text.text = score.ToString();
         }
     }
