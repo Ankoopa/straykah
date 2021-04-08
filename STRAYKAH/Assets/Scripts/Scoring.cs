@@ -9,20 +9,14 @@ public class Scoring : MonoBehaviour
 {
     public int score = 0;
     public Text text;
-    private float moveLevel = 5;
-    public GameObject Ball1;
-    public GameObject Ball2;
-    public GameObject Ball3;
-    public GameObject Ball4;
+    private int moveLevel = 5;
+    public GameObject[] balls;
     
     public GameObject Sphere;
 
     public GameObject Arrow;
 
-    public Transform Waypoint1;
-    public Transform Waypoint2;
-    public Transform Waypoint3;
-    public Transform Waypoint4;
+    public Transform[] waypoints;
     public Transform BallWaypoint;
 
     public GameObject BonusShot;
@@ -45,48 +39,21 @@ public class Scoring : MonoBehaviour
         
             score = score + 25;
             moveLevel -= 1;
-            
-            if (moveLevel == 5){
-                Ball1.SetActive(false);
-                Ball2.SetActive(false);
-                Ball3.SetActive(false);
-                Ball4.SetActive(false);
-            }
-            else if (moveLevel == 4){
-                Ball4.SetActive(true);
 
-                Character.transform.position = Waypoint1.position;
-                Character.transform.rotation = Waypoint1.rotation;
-                BallObject.transform.position = BallWaypoint.position;
-                BallObject.transform.rotation = BallWaypoint.rotation;
-            }
-            else if (moveLevel == 3){
-                Ball3.SetActive(true);
-
-                Character.transform.position = Waypoint2.position;
-                Character.transform.rotation = Waypoint2.rotation;
-                BallObject.transform.position = BallWaypoint.position;
-                BallObject.transform.rotation = BallWaypoint.rotation;
-            }
-            else if (moveLevel == 2){
-                Ball2.SetActive(true);
-
-                Character.transform.position = Waypoint3.position;
-                Character.transform.rotation = Waypoint3.rotation;
-                BallObject.transform.position = BallWaypoint.position;
-                BallObject.transform.rotation = BallWaypoint.rotation;
-            }
-            else if (moveLevel == 1){
-                Ball1.SetActive(true);
-                BonusShot.SetActive(true);
-
-                Character.transform.position = Waypoint4.position;
-                Character.transform.rotation = Waypoint4.rotation;
-                BallObject.transform.position = BallWaypoint.position;
-                BallObject.transform.rotation = BallWaypoint.rotation;
-            }
-            else if (moveLevel == 0){
-                StartCoroutine(MoveLevel());
+            switch(moveLevel){
+                case 0:
+                    StartCoroutine(MoveLevel());
+                    break;
+                case 5:
+                    foreach(GameObject ball in balls) ball.SetActive(false);
+                    break;
+                default:
+                    balls[moveLevel-1].SetActive(true);
+                    Character.transform.position = waypoints[moveLevel-1].position;
+                    Character.transform.rotation = waypoints[moveLevel-1].rotation;
+                    BallObject.transform.position = BallWaypoint.position;
+                    BallObject.transform.rotation = BallWaypoint.rotation;
+                    break;
 
             }
             text.text = score.ToString();
