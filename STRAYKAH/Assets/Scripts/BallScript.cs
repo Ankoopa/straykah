@@ -59,17 +59,17 @@ public class BallScript : MonoBehaviour
         }
     }
 
-    public void StartKick(){
-        float angle = arrowGuide.transform.localRotation.eulerAngles.y;
-        angle = (angle > 180) ? angle - 360 : angle; // converts to negative angle if angled to the left
+    // public void StartKick(){
+    //     float angle = arrowGuide.transform.localRotation.eulerAngles.y;
+    //     angle = (angle > 180) ? angle - 360 : angle; // converts to negative angle if angled to the left
 
-        directionMultiplier = angle / 40;
-        throwDirection.x *= directionMultiplier;
+    //     directionMultiplier = angle / 40;
+    //     throwDirection.x *= directionMultiplier;
 
-        forceMultiplier = (float)int.Parse(powerText.text)/100;
-        kickForce = defaultKickForce * forceMultiplier;
+    //     forceMultiplier = (float)int.Parse(powerText.text)/100;
+    //     kickForce = defaultKickForce * forceMultiplier;
 
-        rb.useGravity = true;
-        rb.AddForce(throwDirection.normalized * kickForce);
-    }
+    //     rb.useGravity = true;
+    //     rb.AddForce(throwDirection.normalized * kickForce);
+    // }
 }
