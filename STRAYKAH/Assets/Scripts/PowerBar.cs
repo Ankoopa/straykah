@@ -16,14 +16,18 @@ public class PowerBar : MonoBehaviour
     private bool isDirectionUp = true;
     public float ammntPower = 0.0f;
     private float speedPower = 100.0f;
+    private bool hasKicked;
 
     void Start() {
         Rigidbody rb = GetComponent<Rigidbody>();
     }
     void Update()
     {   
-        PowerActive();
-        if(Input.GetButtonDown("Fire1")){   
+        if(!hasKicked){
+            PowerActive();
+        }
+
+        if(Input.GetMouseButtonDown(0)){   
             EndPower();          
         }
     }
@@ -48,6 +52,7 @@ public class PowerBar : MonoBehaviour
 
     public void EndPower()
     {
+        hasKicked = true;
         textPower.text = ammntPower.ToString("F0");
     }
     
