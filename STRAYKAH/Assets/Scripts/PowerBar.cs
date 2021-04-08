@@ -17,12 +17,8 @@ public class PowerBar : MonoBehaviour
     public float ammntPower = 0.0f;
     private float speedPower = 100.0f;
 
-    public GameObject button;
-
-
     void Start() {
         Rigidbody rb = GetComponent<Rigidbody>();
-        button.SetActive(true);
     }
     void Update()
     {   

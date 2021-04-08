@@ -36,7 +36,8 @@ public class StartQuit : MonoBehaviour
         SceneManager.LoadScene(1);
     }
     IEnumerator WaitClickEndButton(){
-        yield return new WaitForSeconds(2);
+        Cursor.visible = false;
+        yield return new WaitForSeconds(1);
         PanelEnd.SetActive(true);
         PanelEnd.SetActive(false);
         Application.Quit();

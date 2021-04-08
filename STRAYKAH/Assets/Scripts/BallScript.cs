@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class BallScript : MonoBehaviour
 {
-    private Rigidbody rb;
+    public Rigidbody rb;
     private Vector3 throwDirection;
     private float defaultKickForce, kickForce;
     private float directionMultiplier, forceMultiplier;
-    private Text powerText;
+    public Text powerText;
 
     public GameObject arrowGuide;
     // Start is called before the first frame update
@@ -24,13 +24,32 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey("a")){
-            arrowGuide.transform.Rotate(0, -10 * Time.deltaTime, 0);
+         if(Input.GetAxis("Mouse X")<0){
+            arrowGuide.transform.Rotate(0, -100 * Time.deltaTime, 0);
+        }
+        if(Input.GetAxis("Mouse X")>0){
+            arrowGuide.transform.Rotate(0, 100 * Time.deltaTime, 0);
+        }
+        if (Input.GetMouseButtonDown(0)){
+            float angle = arrowGuide.transform.localRotation.eulerAngles.y;
+            angle = (angle > 180) ? angle - 360 : angle; // converts to negative angle if angled to the left
+
+            directionMultiplier = angle / 40;
+            throwDirection.x *= directionMultiplier;
+
+            forceMultiplier = (float)int.Parse(powerText.text)/100;
+            kickForce = defaultKickForce * forceMultiplier;
+
+            rb.useGravity = true;
+            rb.AddForce(throwDirection.normalized * kickForce);
         }
 
-        if(Input.GetKey("d")){
-            arrowGuide.transform.Rotate(0, 10 * Time.deltaTime, 0);
-        }
+        // if(Input.GetKey("a")){
+        //     arrowGuide.transform.Rotate(0, -100 * Time.deltaTime, 0);
+        // }
+        // if(Input.GetKey("d")){
+        //     arrowGuide.transform.Rotate(0, 100 * Time.deltaTime, 0);
+        // }
         
         if(arrowGuide.transform.localRotation.eulerAngles.y < 320  && arrowGuide.transform.localRotation.eulerAngles.y > 180){
             arrowGuide.transform.eulerAngles = new Vector3(0, -40, 0);
